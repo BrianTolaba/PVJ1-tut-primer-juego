@@ -1,4 +1,5 @@
 using System.Collections.Specialized;
+using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 
@@ -22,6 +23,16 @@ public class PlayerMovement : MonoBehaviour
     /// Indica cada cuanto tiempo debe aplicarse la fuerza
     /// </summary>
     private float intervaloTiempo;
+    /// <summary>
+    /// Indica la velocidad aplicada en el movimiento lateral
+    /// </summary>
+  
+    /// <summary>
+    /// Representa la estrategia de movimento
+    /// </summary>
+    private IMovementStrategy movementStrategy;
+
+    private Player player;
     #endregion
 
     #region Ciclo de vida del script
@@ -32,9 +43,19 @@ public class PlayerMovement : MonoBehaviour
         fuerzaPorAplicar = new Vector3(0, 0, 6f);
         tiempoDesdeUltimaFuerza = 0f;
         intervaloTiempo = 2f;
+
+        player = new Player(5f, 5f);
+        
+        //SetMovementStrategy(new SmoothMovement());
+        SetMovementStrategy(new AcelerateMovement());
     }
 
-   
+    private void Update() 
+    {
+        MovePlayer();
+    }
+
+   // Logica para la aplicacion de fuerzas 
     private void FixedUpdate()
     {
         tiempoDesdeUltimaFuerza += Time.fixedDeltaTime;
@@ -45,4 +66,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #endregion
+
+    #region Logica del script
+    
+    #endregion
+    public void MovePlayer()
+    {
+        movementStrategy.Move(transform, player);
+    }
+    public void SetMovementStrategy(IMovementStrategy movementStrategy)
+    {
+        this.movementStrategy = movementStrategy;
+    }
 }
