@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         fuerzaPorAplicar = new Vector3(0, 0, 6f);
         tiempoDesdeUltimaFuerza = 0f;
-        intervaloTiempo = 2f;
+        intervaloTiempo = 1f;
 
         player = new Player(5f, 5f);
         

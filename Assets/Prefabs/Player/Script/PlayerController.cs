@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour
         commands.Clear();
         float horizontalInput = Input.GetAxis("Horizontal");
         commands.Add(new MoveCommand(playerMovement, horizontalInput));
+
         if (Input.GetKey(KeyCode.Space))
         {
             commands.Add(new AcelerateMoveCommand(playerMovement, horizontalInput));
         }
+
         foreach (var command in commands)
         {
             command.Execute();
