@@ -42,18 +42,18 @@ public class PlayerMovement : MonoBehaviour
     {
         fuerzaPorAplicar = new Vector3(0, 0, 6f);
         tiempoDesdeUltimaFuerza = 0f;
-        intervaloTiempo = 2f;
+        intervaloTiempo = 1f;
 
         player = new Player(5f, 5f);
         
         //SetMovementStrategy(new SmoothMovement());
-        SetMovementStrategy(new AcelerateMovement());
+       SetMovementStrategy(new AcelerateMovement());
     }
 
-    private void Update() 
+   /* private void Update() ///////////////////////////////////
     {
         MovePlayer();
-    }
+    }*/
 
    // Logica para la aplicacion de fuerzas 
     private void FixedUpdate()
@@ -70,9 +70,9 @@ public class PlayerMovement : MonoBehaviour
     #region Logica del script
     
     #endregion
-    public void MovePlayer()
+    public void MovePlayer(float input)
     {
-        movementStrategy.Move(transform, player);
+        movementStrategy.Move(transform, player, input);
     }
     public void SetMovementStrategy(IMovementStrategy movementStrategy)
     {
